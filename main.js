@@ -1,26 +1,58 @@
-class EventObserver {
-    constructor() {
-        this.observers = [];
+// class EventObserver {
+//     constructor() {
+//         this.observers = [];
+//     }
+//
+//     subscribe(fn) {
+//         this.observers.push(fn);
+//     }
+//
+//     unsubscribe(fn) {
+//         this.observers = this.observers.filter((observerFn) => {
+//             return observerFn !== fn;
+//         });
+//     }
+//
+//     broadCast(data) {
+//         this.observers.forEach((observer) => {
+//             observer(data);
+//         });
+//     }
+// }
+
+let EventObserver = function () {
+    let observers;
+
+    function constructor() {
+        observers = [];
     }
 
-    subscribe(fn) {
-        this.observers.push(fn);
+    function subscribe(fn) {
+        observers.push(fn);
     }
 
-    unsubscribe(fn) {
-        this.observers = this.observers.filter((observerFn) => {
+    function unsubscribe(fn) {
+        observers = observers.filter((observerFn) => {
             return observerFn !== fn;
         });
     }
 
-    broadCast(data) {
-        this.observers.forEach((observer) => {
+    function broadCast(data) {
+        observers.forEach((observer) => {
             observer(data);
         });
     }
-}
 
-window.blogObserver = new EventObserver();
+    constructor.apply(this);
+
+    return {
+        subscribe,
+        unsubscribe,
+        broadCast
+    };
+};
+
+window.blogObserver = EventObserver();
 
 function writeToDOM(content) {
     let loggerEl = document.getElementById('wordCounter');
