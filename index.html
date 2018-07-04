@@ -8,12 +8,26 @@
 <body>
 <textarea id="blogPost" placeholder="Enter your blog post..." class="blogPost">
 </textarea>
-
-<div id="logger">
+<div>
   <p>
-    <span id="wordCounter"></span>
+    We publish a observer, and two different components subscribe to it, to make different things with
+    the value received.
   </p>
+  
+  <p>
+    Component 1: All 'a' letters will be replaced for 'x' letters.
+  </p>
+  <p id="component1Logger"></p>
 </div>
-<script src="main.js"></script>
+
+<div>
+  <p>
+    Component 2: All 'e' letters will be replaced for 'y' letters.
+  </p>
+  <p id="component2Logger"></p>
+</div>
+<script src="./main.js"></script>
+<script src="./module1.js"></script>
+<script src="./module2.js"></script>
 </body>
 </html>

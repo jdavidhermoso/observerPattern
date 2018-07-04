@@ -5,7 +5,6 @@ class EventObserver {
 
     subscribe(fn) {
         this.observers.push(fn);
-        writeToDOM('Subscribe!');
     }
 
     unsubscribe(fn) {
@@ -20,6 +19,8 @@ class EventObserver {
         });
     }
 }
+
+window.blogObserver = new EventObserver();
 
 function writeToDOM(content) {
     let loggerEl = document.getElementById('wordCounter');
@@ -45,17 +46,8 @@ function getWordCount(text) {
 }
 
 (() => {
-    // useBasicObserverPatternImplementation();
-    // writeToDOM(`Word count: ${getWordCount(getText())}`);
-    const blogObserver = new EventObserver();
     const blogPost = document.getElementById('blogPost');
     blogPost.addEventListener('keyup', () => {
         blogObserver.broadCast(blogPost.value);
     });
-
-    blogObserver.subscribe((text) => {
-        writeToDOM(`Word count: ${getWordCount(text)}`);
-    });
-
-
 })();
